@@ -12,7 +12,7 @@ const Card = ({card}) => {
           if(e.target.className == 'card') {
             e.target.style.marginTop = '100px'
           }
-
+          return
         }
       }
 

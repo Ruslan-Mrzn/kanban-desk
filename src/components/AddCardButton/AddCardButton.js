@@ -15,6 +15,16 @@ const AddCardButton = ({number}) => {
         }
       className={`addCardBtn ${isVisible ? 'visible' : 'hidden'}`}
       type='button'
+      onDragOver={
+        (e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          if(e.target.classList.contains('addCardBtn')) {
+            e.target.style.marginTop = '100px'
+          }
+          return
+        }
+      }
     >
       <span className='plus'>+</span>Добавить карточку
     </button>
