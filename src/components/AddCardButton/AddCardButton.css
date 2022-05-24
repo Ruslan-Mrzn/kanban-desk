@@ -1,0 +1,31 @@
+.addCardBtn {
+  justify-content: start;
+  align-items: center;
+  padding: 10px;
+  column-gap: 15px;
+  width: 100%;
+  min-height: 40px;
+  border: none;
+  background-color: transparent;
+  color: #74757C;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.visible {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}
+
+.addCardBtn:hover {
+  background-color: #27272D;
+}
+
+.plus {
+  font-size: 30px;
+  line-height: 1;
+}

@@ -1,0 +1,13 @@
+.card {
+  min-height: 100px;
+  padding: 20px 10px;
+  margin: 0 auto;
+  width: calc(100% - 20px);
+  background-color: #1F1F23;
+  color: #787A7F;
+  cursor: grab;
+}
+
+.cardID {
+  color: white;
+}
