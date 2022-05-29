@@ -5,7 +5,11 @@
   width: calc(100% - 20px);
   background-color: #1F1F23;
   color: #787A7F;
-  cursor: grab;
+  cursor: move;
+}
+
+.selected {
+
 }
 
 .cardID {

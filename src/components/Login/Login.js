@@ -3,13 +3,13 @@ import { useDispatch } from "react-redux"
 import { setCredentials } from "../../store/authSlice"
 import { useLoginUserMutation } from '../services/kanbanService'
 import FormInput from "../FormInput/FormInput"
+import { useNavigate } from "react-router-dom"
 
-
-
-export const Login = () => {
+const Login = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const [loginUser, {}] = useLoginUserMutation()
+  const [loginUser] = useLoginUserMutation()
 
   const [formState, setFormState] = useState({
     username: '',
@@ -19,21 +19,23 @@ export const Login = () => {
   const handleChange = ({ target: { name, value }}) =>
     setFormState((prev) => ({ ...prev, [name]: value }))
 
+
   return (
     <>
       <h2>Привет !</h2>
       <p>Введите Ваши учетные данные чтобы войти</p>
       <form
         name="login"
-        onSubmit={async (e) => {
+        onSubmit={(e) => {
           e.preventDefault()
-          try {
-            const token = await loginUser(formState).unwrap()
-            localStorage.setItem('authToken', JSON.stringify(token))
-            console.log('yo', token)
-            dispatch(setCredentials(token))
-          }
-          catch (err) {}
+          loginUser(formState).unwrap()
+            .then((token) => {
+              localStorage.setItem('authToken', JSON.stringify(token))
+              dispatch(setCredentials(token))
+              console.log('yo', token)
+            })
+            .then(()=>navigate('/'))
+            .catch(err => console.error(err))
         }}
       >
           <FormInput name={'username'} type={'text'} placeholder={'Введите ваш логин ...'} onChange={handleChange} />
@@ -44,3 +46,5 @@ export const Login = () => {
 
   )
 }
+
+export default Login
