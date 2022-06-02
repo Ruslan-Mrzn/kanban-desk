@@ -30,8 +30,9 @@ const Login = () => {
           e.preventDefault()
           loginUser(formState).unwrap()
             .then((token) => {
-              localStorage.setItem('authToken', JSON.stringify(token))
               dispatch(setCredentials(token))
+              localStorage.setItem('authToken', JSON.stringify(token))
+
               console.log('yo', token)
             })
             .then(()=>navigate('/'))

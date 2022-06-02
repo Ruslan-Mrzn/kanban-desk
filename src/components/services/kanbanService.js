@@ -36,15 +36,14 @@ export const kanbanApi = createApi({
       }),
       invalidatesTags: ['Cards']
     }),
-    updateCard: builder.mutation ({
-      query: (card) => ({
-        url: `cards/${card.id}`,
-        method: 'PATCH',
-        body: card // Body is automatically converted to json with the correct headers
+    deleteCard: builder.mutation ({
+      query: (id) => ({
+        url: `cards/${id}`,
+        method: 'DELETE',
       }),
       invalidatesTags: ['Cards']
     }),
   })
 })
 
-export const { useLoginUserMutation, useGetCardsQuery, useAddCardMutation, useUpdateCardMutation } = kanbanApi
+export const { useLoginUserMutation, useGetCardsQuery, useAddCardMutation, useDeleteCardMutation, useLazyGetCardsQuery } = kanbanApi
