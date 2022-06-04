@@ -3,7 +3,9 @@ import { useDispatch } from "react-redux"
 import { setCredentials } from "../../store/authSlice"
 import { useLoginUserMutation } from '../services/kanbanService'
 import FormInput from "../FormInput/FormInput"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+
+import './Login.css'
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -16,18 +18,27 @@ const Login = () => {
     password: '',
   })
 
-  const handleChange = ({ target: { name, value }}) =>
+  const [formErrors, setFormErrors] = useState({})
+
+  const [validityOptions, setValidityOptions] = useState({})
+
+
+  const handleChange = ({ target: { name, value, validity, type }}) =>{
     setFormState((prev) => ({ ...prev, [name]: value }))
+    setFormErrors((prev) => ({ ...prev, [type]: validity.valid}))
+  }
 
 
   return (
-    <>
-      <h2>Привет !</h2>
-      <p>Введите Ваши учетные данные чтобы войти</p>
+    <div className="loginPage">
       <form
+        className="form"
+        noValidate={true}
         name="login"
         onSubmit={(e) => {
           e.preventDefault()
+          setValidityOptions(JSON.parse(JSON.stringify(formErrors)))
+          setFormErrors({})
           loginUser(formState).unwrap()
             .then((token) => {
               dispatch(setCredentials(token))
@@ -37,13 +48,35 @@ const Login = () => {
             })
             .then(()=>navigate('/'))
             .catch(err => console.error(err))
+
         }}
       >
-          <FormInput name={'username'} type={'text'} placeholder={'Введите ваш логин ...'} onChange={handleChange} />
-          <FormInput name={'password'} type={'password'} placeholder={'Введите ваш пароль ...'} onChange={handleChange} />
-          <button type="submit">Войти</button>
+        <h2>Привет !</h2>
+        <p>Введите Ваши учетные данные чтобы войти</p>
+        <FormInput
+          name={'username'}
+          type={'text'}
+          placeholder={'Введите ваш логин ...'}
+          onChange={handleChange}
+          pattern={'[0-9A-Za-zА-Яа-яЁё\.\@\+\-]{1,250}'}
+          validityOptions={validityOptions}
+          required={true}
+        />
+
+        <FormInput
+          name={'password'}
+          type={'password'}
+          placeholder={'Введите ваш пароль ...'}
+          onChange={handleChange}
+          maxLength={128}
+          validityOptions={validityOptions}
+          required={true}
+        />
+        <button className="loginButton" type="submit" disabled={!formState.password||!formState.username}>Войти</button>
+        <p className="registerBlock">Нет аккаунта? Тогда Вы можете  <Link className="registerLink" to={'/register'}>зарегистрироваться</Link></p>
+
       </form>
-    </>
+    </div>
 
   )
 }
