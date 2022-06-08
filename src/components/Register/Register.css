@@ -1,0 +1,36 @@
+.registerPage {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.registerButton {
+  min-height: 40px;
+  font-size: 20px;
+  background-color: lightseagreen;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+
+.registerButton:disabled {
+  cursor: default;
+  background-color: lightgrey;
+}
+
+.loginBlock {
+  color: aqua;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 10px;
+}
+
+.loginLink {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: khaki;
+}

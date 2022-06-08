@@ -24,6 +24,7 @@ const Login = () => {
 
 
   const handleChange = ({ target: { name, value, validity, type }}) =>{
+    setFormErrors({})
     setFormState((prev) => ({ ...prev, [name]: value }))
     setFormErrors((prev) => ({ ...prev, [type]: validity.valid}))
   }

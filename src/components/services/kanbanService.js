@@ -14,6 +14,14 @@ export const kanbanApi = createApi({
     }
   }),
   endpoints: (builder) => ({
+    registerUser: builder.mutation ({
+      query: (user) => ({
+        url: `users/register/`,
+        method: 'POST',
+        body: user // Body is automatically converted to json with the correct headers
+      }),
+      //invalidatesTags: ['Cards']
+    }),
     loginUser: builder.mutation ({
       query: (user) => ({
         url: `users/login/`,
@@ -46,4 +54,4 @@ export const kanbanApi = createApi({
   })
 })
 
-export const { useLoginUserMutation, useGetCardsQuery, useAddCardMutation, useDeleteCardMutation, useLazyGetCardsQuery } = kanbanApi
+export const { useLoginUserMutation, useGetCardsQuery, useAddCardMutation, useDeleteCardMutation, useLazyGetCardsQuery, useRegisterUserMutation } = kanbanApi
