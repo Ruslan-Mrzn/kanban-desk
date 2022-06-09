@@ -14,3 +14,11 @@ body {
   color: white;
   font-size: 16px;
 }
+
+button[type='button'] {
+  transition: opacity .4s linear;
+}
+
+button[type='button']:hover {
+  opacity: .8;
+}

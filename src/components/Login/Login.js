@@ -4,6 +4,7 @@ import { setCredentials } from "../../store/authSlice"
 import { useLoginUserMutation } from '../services/kanbanService'
 import FormInput from "../FormInput/FormInput"
 import { Link, useNavigate } from "react-router-dom"
+import Header from "../Header/Header"
 
 import './Login.css'
 
@@ -24,14 +25,19 @@ const Login = () => {
 
 
   const handleChange = ({ target: { name, value, validity, type }}) =>{
-    setFormErrors({})
+    setValidityOptions({})
     setFormState((prev) => ({ ...prev, [name]: value }))
     setFormErrors((prev) => ({ ...prev, [type]: validity.valid}))
   }
 
 
   return (
+    <>
+
+
+    <Header />
     <div className="loginPage">
+
       <form
         className="form"
         noValidate={true}
@@ -78,7 +84,7 @@ const Login = () => {
 
       </form>
     </div>
-
+    </>
   )
 }
 
