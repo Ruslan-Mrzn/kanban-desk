@@ -22,11 +22,20 @@ const Register = () => {
 
   const [validityOptions, setValidityOptions] = useState({})
 
+  const [isFormValid, setIsFormValid] = useState(false)
+
 
   const handleChange = ({ target: { name, value, validity, type }}) =>{
-    setValidityOptions({})
+    setValidityOptions((prev) => ({ ...prev, [type]: true}))
     setFormState((prev) => ({ ...prev, [name]: value }))
     setFormErrors((prev) => ({ ...prev, [type]: validity.valid}))
+  }
+
+  const checkFormValidity = (formValidity) => {
+    for (let type in  formValidity) {
+      if (formValidity[type] !== true) setIsFormValid(false)
+      setIsFormValid(true)
+    }
   }
 
 
@@ -38,9 +47,9 @@ const Register = () => {
         name="login"
         onSubmit={(e) => {
           e.preventDefault()
+          checkFormValidity(formErrors)
           setValidityOptions(JSON.parse(JSON.stringify(formErrors)))
-          setFormErrors({})
-          register(formState).unwrap()
+          isFormValid && register(formState).unwrap()
             .then((token) => {
               dispatch(setCredentials(token))
               localStorage.setItem('authToken', JSON.stringify(token))

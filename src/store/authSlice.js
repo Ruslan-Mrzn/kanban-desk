@@ -14,10 +14,18 @@ const slice = createSlice({
       state.token = token
       console.log(state.token)
     },
+    setAccessCredentials: (
+      state,
+      { payload: { access } }
+    ) => {
+      console.log(state.token)
+      state.token = access
+      console.log(state.token)
+    },
   },
 })
 
-export const { setCredentials } = slice.actions
+export const { setCredentials, setAccessCredentials } = slice.actions
 
 export default slice.reducer
 

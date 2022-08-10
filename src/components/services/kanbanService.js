@@ -16,7 +16,7 @@ export const kanbanApi = createApi({
   endpoints: (builder) => ({
     registerUser: builder.mutation ({
       query: (user) => ({
-        url: `users/register/`,
+        url: `users/create/`,
         method: 'POST',
         body: user // Body is automatically converted to json with the correct headers
       }),
@@ -24,7 +24,7 @@ export const kanbanApi = createApi({
     }),
     loginUser: builder.mutation ({
       query: (user) => ({
-        url: `users/login/`,
+        url: `users/token/`,
         method: 'POST',
         body: user // Body is automatically converted to json with the correct headers
       }),

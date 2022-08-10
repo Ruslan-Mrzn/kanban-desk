@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 const FormInput = ({ type, name, pattern, placeholder, required, onChange, validityOptions, minLength, maxLength }) => {
 
-  const [isValid,setIsValid] = useState(true)
+  const [isValid, setIsValid] = useState(true)
 
   let inputInfo = ''
   switch(type) {

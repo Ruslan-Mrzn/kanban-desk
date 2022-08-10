@@ -1,8 +1,17 @@
 .desk {
-  display: grid;
-  align-items: start;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  column-gap: 50px;
   width: 90%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+}
+
+
+@media screen and (min-width: 768px) {
+  .desk {
+    display: grid;
+    align-items: start;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 50px;
+  }
 }

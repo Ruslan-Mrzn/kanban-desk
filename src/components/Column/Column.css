@@ -5,6 +5,7 @@
   justify-content: flex-start;
   align-items: stretch;
   row-gap: 10px;
+  position: relative;
 }
 
 .columnTitle {
@@ -20,10 +21,42 @@
 }
 
 .list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-  min-height: 50px;
+  display: none;
 }
 
+.toggleColumnCards {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.toggleColumnCards::before {
+  content: 'V';
+  font-size: 30px;
+  font-weight: 700;
+  color: white;
+  line-height: .8;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (min-width: 768px) {
+  .list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    min-height: 50px;
+  }
+
+  .toggleColumnCards {
+    display: none;
+  }
+}

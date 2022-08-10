@@ -11,54 +11,15 @@ const Column = ({title, color, cards, number}) => {
   return (
     <div
       className='column'
-      onDragOver={
-        (e) => e.preventDefault()
-      }
-      onDragEnter={
-        (e) => {
-          e.preventDefault()
-          if(e.target.className == 'column') {
-              const cards = e.target.closest('.column').querySelector('.list').querySelectorAll('.card')
-              cards.forEach(card=>card.style.marginTop = '0')
-              return
-              //list.style.height = `${list.offsetHeight-100}px`
-            }
-        }
-
-      }
-      onDragLeave={
-        (e) => {
-          e.preventDefault()
-          if(e.target.className == 'column') {
-            const addButton = e.target.closest('.column').querySelector('.addCardBtn')
-            addButton.style.marginTop = '0'
-            return
-            //list.style.height = `${list.offsetHeight-100}px`
-          }
-        }
-      }
     >
       <h1 className='columnTitle' style={{backgroundColor: color}}>{`${title} (${cards.length})`}</h1>
+      {/* <button
+        className='toggleColumnCards'
+        type='button'
+        //onClick
+      ></button> */}
       <ul
         className='list'
-        onDragOver={
-          (e) => e.preventDefault()
-        }
-        onDragEnter={
-          (e) => e.preventDefault()
-
-        }
-        onDragLeave={
-          (e) => {
-            e.preventDefault()
-            if(e.target.className == 'list') {
-              const cards = e.target.closest('.column').querySelector('.list').querySelectorAll('.card')
-              cards.forEach(card=>card.style.marginTop = '0')
-              return
-              //list.style.height = `${list.offsetHeight-100}px`
-            }
-          }
-        }
       >
         {
           cards && cards.map(card => (
