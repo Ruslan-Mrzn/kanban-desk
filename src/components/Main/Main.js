@@ -7,9 +7,9 @@ import { filterCards } from '../../utils/utils'
 const Main = () => {
   const navigate = useNavigate();
   const [getCards, {data, isError, isSuccess}] = useLazyGetCardsQuery()
-  const localCards = JSON.parse(localStorage.getItem('localCards'))
   useEffect(()=>{
     getCards()
+    console.log(data)
     if(isError) {
       navigate('/login')
     }
@@ -20,10 +20,10 @@ const Main = () => {
 
   return (
     isSuccess&&<div className='desk'>
-      <Column title='On hold' color="#F88B4A" cards={filterCards(localCards ? localCards : data, 0)} number={0}/>
-      <Column title='In progress' color="#3C8BBE" cards={filterCards(localCards ? localCards : data, 1)} number={1}/>
-      <Column title='Needs review' color="#F5C852" cards={filterCards(localCards ? localCards : data, 2)} number={2}/>
-      <Column title='Approved' color="#4BA468" cards={filterCards(localCards ? localCards : data, 3)} number={3}/>
+      <Column title='On hold' color="#F88B4A" cards={filterCards(data, 0)} number={0}/>
+      <Column title='In progress' color="#3C8BBE" cards={filterCards(data, 1)} number={1}/>
+      <Column title='Needs review' color="#F5C852" cards={filterCards(data, 2)} number={2}/>
+      <Column title='Approved' color="#4BA468" cards={filterCards(data, 3)} number={3}/>
     </div>
   )
 }

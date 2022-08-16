@@ -30,6 +30,14 @@ export const kanbanApi = createApi({
       }),
       //invalidatesTags: ['Cards']
     }),
+    refreshToken: builder.mutation ({
+      query: (refresh) => ({
+        url: `users/token/refresh/`,
+        method: 'POST',
+        body: refresh // Body is automatically converted to json with the correct headers
+      }),
+      //invalidatesTags: ['Cards']
+    }),
     getCards: builder.query({
       query: () => ({
         url: `cards/`,

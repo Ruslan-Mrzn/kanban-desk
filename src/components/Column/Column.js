@@ -13,11 +13,6 @@ const Column = ({title, color, cards, number}) => {
       className='column'
     >
       <h1 className='columnTitle' style={{backgroundColor: color}}>{`${title} (${cards.length})`}</h1>
-      {/* <button
-        className='toggleColumnCards'
-        type='button'
-        //onClick
-      ></button> */}
       <ul
         className='list'
       >

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { setCredentials, setAccessCredentials } from "../../store/authSlice"
+import { setAccessCredentials } from "../../store/authSlice"
 import { useLoginUserMutation } from '../services/kanbanService'
 import FormInput from "../FormInput/FormInput"
 import { Link, useNavigate } from "react-router-dom"
@@ -44,23 +44,21 @@ const Login = () => {
     <>
       <Header />
       <div className="loginPage">
-
         <form
           className="form"
           noValidate={true}
           name="login"
           onSubmit={(e) => {
             e.preventDefault()
+            console.log(formState)
             checkFormValidity(formErrors)
             setValidityOptions(JSON.parse(JSON.stringify(formErrors)))
             isFormValid && loginUser(formState).unwrap()
               .then((token) => {
-                console.log(token.access)
-                console.log(typeof token)
+                localStorage.setItem('authToken', JSON.stringify(token.access))
+                localStorage.setItem('authRefresh', JSON.stringify(token.refresh))
                 dispatch(setAccessCredentials(token))
-                localStorage.setItem('authToken', JSON.stringify(token))
-
-                console.log('yo', token)
+                console.log('yo', token.access)
               })
               .then(()=>navigate('/'))
               .catch(err => console.error(err))

@@ -1,11 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 
-const initialToken = JSON.parse(localStorage.getItem('authToken')) || {}
+const initialToken = JSON.parse(localStorage.getItem('authToken')) || ''
+const initialRefresh = JSON.parse(localStorage.getItem('authRefresh')) || ''
 
 const slice = createSlice({
   name: 'auth',
-  initialState: initialToken,
+  initialState: {
+    token: initialToken,
+    refresh: initialRefresh
+  },
   reducers: {
     setCredentials: (
       state,
@@ -16,11 +20,10 @@ const slice = createSlice({
     },
     setAccessCredentials: (
       state,
-      { payload: { access } }
+      { payload: { access, refresh } }
     ) => {
-      console.log(state.token)
       state.token = access
-      console.log(state.token)
+      state.refresh = refresh
     },
   },
 })
