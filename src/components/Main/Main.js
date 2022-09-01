@@ -5,16 +5,18 @@ import Column from '../Column/Column'
 import { filterCards } from '../../utils/utils'
 
 const Main = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+
   const [getCards, {data, isError, isSuccess}] = useLazyGetCardsQuery()
+
   useEffect(()=>{
     getCards()
-    console.log(data)
     if(isError) {
       navigate('/login')
     }
     if(isSuccess) {
       localStorage.setItem('localCards', JSON.stringify(data))
+
     }
   }, [navigate, isError, getCards, isSuccess, data])
 

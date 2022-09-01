@@ -5,11 +5,9 @@ export const kanbanApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://trello.backend.tests.nekidaem.ru/api/v1/',
     prepareHeaders: (headers, { getState }) => {
-      console.log(getState())
       const token = getState().auth.token
-
       if(token) headers.set('Authorization', `JWT ${token}`)
-
+      console.log(getState())
       return headers
     }
   }),
@@ -20,7 +18,7 @@ export const kanbanApi = createApi({
         method: 'POST',
         body: user // Body is automatically converted to json with the correct headers
       }),
-      //invalidatesTags: ['Cards']
+      invalidatesTags: ['Cards']
     }),
     loginUser: builder.mutation ({
       query: (user) => ({
@@ -28,7 +26,7 @@ export const kanbanApi = createApi({
         method: 'POST',
         body: user // Body is automatically converted to json with the correct headers
       }),
-      //invalidatesTags: ['Cards']
+      invalidatesTags: ['Cards']
     }),
     refreshToken: builder.mutation ({
       query: (refresh) => ({
@@ -36,7 +34,7 @@ export const kanbanApi = createApi({
         method: 'POST',
         body: refresh // Body is automatically converted to json with the correct headers
       }),
-      //invalidatesTags: ['Cards']
+      invalidatesTags: ['Cards']
     }),
     getCards: builder.query({
       query: () => ({
@@ -59,7 +57,23 @@ export const kanbanApi = createApi({
       }),
       invalidatesTags: ['Cards']
     }),
+    updateCard: builder.mutation ({
+      query: (card) => ({
+        url: `cards/${card.id}`,
+        method: 'PATCH',
+        body: card
+      }),
+      invalidatesTags: ['Cards']
+    }),
   })
 })
 
-export const { useLoginUserMutation, useGetCardsQuery, useAddCardMutation, useDeleteCardMutation, useLazyGetCardsQuery, useRegisterUserMutation } = kanbanApi
+export const {
+  useLoginUserMutation,
+  useGetCardsQuery,
+  useAddCardMutation,
+  useDeleteCardMutation,
+  useLazyGetCardsQuery,
+  useRegisterUserMutation,
+  useUpdateCardMutation
+} = kanbanApi
