@@ -19,25 +19,28 @@ const Column = ({title, color, cards, number}) => {
 
   const [, drop] = useDrop({
     accept: 'CARD',
-    drop: (item, monitor) => {
+    hover: (draggingCard) => {
+      if(dataCards.some(card => card.id == draggingCard.id)) return
+      dataCards.push(draggingCard)
+    },
+    drop: (card, monitor) => {
       console.log('hey', {
-        id: item.id,
+        id: card.id,
         row: number,
-        text: item.text,
-        seq_num: item.seqNum
+        text: card.text,
+        seq_num: card.seqNum
       })
       updateCard({
-        id: item.id,
+        id: card.id,
         row: number,
-        text: item.text,
-        seq_num: item.seqNum
-      })
-      getCards()
+        text: card.text,
+        seq_num: card.seqNum
+      }).unwrap()
+        .then(()=>window.location.reload())
+        .catch(err=>console.error(err))
 
     },
   })
-
-
 
   const moveCard = (dragIndex, hoverIndex) => {
     setDataCards((prevCards) =>

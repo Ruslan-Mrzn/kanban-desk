@@ -75,7 +75,7 @@ const Card = ({ id, text, seqNum, index, moveCard }) => {
       className="card"
       data-handler-id={handlerId}
       ref={ref}
-      style={{ opacity: isDragging ? 0 : 1}}
+      style={{ visibility: isDragging ? 'hidden' : 'visible'}}
     >
         <p>
           <span className="cardID">id: </span>
