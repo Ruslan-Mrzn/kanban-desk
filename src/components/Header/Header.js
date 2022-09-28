@@ -1,10 +1,13 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import './Header.css'
 
 
 const Header = () => {
 
   const [isOpened, setIsOpened] = useState(false)
+
+    const navigate = useNavigate()
 
   return (
     <div className="header">
@@ -19,6 +22,7 @@ const Header = () => {
         className={`logout ${isOpened ? 'visible' : ''}`}
         onClick={()=>{
           localStorage.removeItem('authToken')
+          navigate('/login')
         }}
       >
         Выйти

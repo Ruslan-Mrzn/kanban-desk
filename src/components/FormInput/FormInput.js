@@ -13,7 +13,7 @@ const FormInput = ({ type, name, pattern, placeholder, required, onChange, valid
       break
 
     case 'password':
-      inputInfo='Необходимо заполнить. Не более 128 символов. Можно вводить любые буквы, цифры и символы'
+      inputInfo='Необходимо заполнить. Не менее 8 символов. Можно вводить любые буквы, цифры и символы'
       break
 
     case 'email':

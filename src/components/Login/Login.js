@@ -4,7 +4,6 @@ import { setAccessCredentials } from "../../store/authSlice"
 import { useLoginUserMutation } from '../services/kanbanService'
 import FormInput from "../FormInput/FormInput"
 import { Link, useNavigate } from "react-router-dom"
-import Header from "../Header/Header"
 
 import './Login.css'
 
@@ -35,14 +34,13 @@ const Login = () => {
   const checkFormValidity = (formValidity) => {
     for (let type in  formValidity) {
       if (formValidity[type] !== true) setIsFormValid(false)
-      setIsFormValid(true)
     }
+    setIsFormValid(true)
   }
 
 
   return (
     <>
-      <Header />
       <div className="loginPage">
         <form
           className="form"
@@ -53,7 +51,7 @@ const Login = () => {
             console.log(formState)
             checkFormValidity(formErrors)
             setValidityOptions(JSON.parse(JSON.stringify(formErrors)))
-            isFormValid && loginUser(formState).unwrap()
+            loginUser(formState).unwrap()
               .then((token) => {
                 localStorage.setItem('authToken', JSON.stringify(token.access))
                 localStorage.setItem('authRefresh', JSON.stringify(token.refresh))
@@ -82,6 +80,7 @@ const Login = () => {
             type={'password'}
             placeholder={'Введите ваш пароль ...'}
             onChange={handleChange}
+            minLength={8}
             maxLength={128}
             validityOptions={validityOptions}
             required={true}

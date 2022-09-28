@@ -93,7 +93,9 @@ const Card = ({ id, text, seqNum, index, moveCard }) => {
           className='cardDelete'
           type='button'
           onClick={()=>{
-            deleteCard(id)
+            deleteCard(id).unwrap()
+              .then(()=>window.location.reload())
+              .catch((err)=>console.error(err))
           }}
         >X
         </button>

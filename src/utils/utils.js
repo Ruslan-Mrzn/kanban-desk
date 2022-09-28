@@ -8,7 +8,7 @@ const checkFormValidity = (inputsArray) => {
 
 const InputsValidationMessages = {
   'email': 'Пожалуйста, проверьте введённый e-mail',
-  'password': 'не менее 1 и не более 128 символов',
+  'password': 'не менее 8 и не более 128 символов',
   'text': 'Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @ . + - _'
 }
 

@@ -23,6 +23,7 @@ const AddCardForm = ({number}) => {
           await addCard({row: `${number}`, text: cardText}).unwrap()
           setCardText('')
           dispatch(toggleCardAddForm(number))
+          window.location.reload()
         }
         catch (err) {
           console.error(err)

@@ -2,12 +2,12 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const kanbanApi = createApi({
   reducerPath: 'kanbanApi',
+
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://trello.backend.tests.nekidaem.ru/api/v1/',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token
       if(token) headers.set('Authorization', `JWT ${token}`)
-      console.log(getState())
       return headers
     }
   }),
@@ -20,6 +20,7 @@ export const kanbanApi = createApi({
       }),
       invalidatesTags: ['Cards']
     }),
+
     loginUser: builder.mutation ({
       query: (user) => ({
         url: `users/token/`,
@@ -28,14 +29,16 @@ export const kanbanApi = createApi({
       }),
       invalidatesTags: ['Cards']
     }),
-    refreshToken: builder.mutation ({
+
+    refreshToken: builder.query ({
       query: (refresh) => ({
         url: `users/token/refresh/`,
         method: 'POST',
-        body: refresh // Body is automatically converted to json with the correct headers
+        body: {refresh: refresh} // Body is automatically converted to json with the correct headers
       }),
       invalidatesTags: ['Cards']
     }),
+
     getCards: builder.query({
       query: () => ({
         url: `cards/`,
@@ -75,5 +78,6 @@ export const {
   useDeleteCardMutation,
   useLazyGetCardsQuery,
   useRegisterUserMutation,
-  useUpdateCardMutation
+  useUpdateCardMutation,
+  useRefreshTokenQuery
 } = kanbanApi

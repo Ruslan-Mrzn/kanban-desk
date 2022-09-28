@@ -13,10 +13,9 @@ const slice = createSlice({
   reducers: {
     setCredentials: (
       state,
-      { payload: { token } }
+      { payload:  { username, email, password, token }  }
     ) => {
       state.token = token
-      console.log(state.token)
     },
     setAccessCredentials: (
       state,
@@ -25,10 +24,16 @@ const slice = createSlice({
       state.token = access
       state.refresh = refresh
     },
+    setRefreshedCredentials: (
+      state,
+      { payload: {access} }
+    ) => {
+      state.token = access
+    }
   },
 })
 
-export const { setCredentials, setAccessCredentials } = slice.actions
+export const { setCredentials, setAccessCredentials, setRefreshedCredentials } = slice.actions
 
 export default slice.reducer
 

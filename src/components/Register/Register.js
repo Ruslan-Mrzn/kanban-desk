@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { setCredentials } from "../../store/authSlice"
+import { setCredentials, setAccessCredentials } from "../../store/authSlice"
 import { useRegisterUserMutation } from '../services/kanbanService'
 import FormInput from "../FormInput/FormInput"
 import { Link, useNavigate } from "react-router-dom"
@@ -49,13 +49,15 @@ const Register = () => {
           e.preventDefault()
           checkFormValidity(formErrors)
           setValidityOptions(JSON.parse(JSON.stringify(formErrors)))
-          isFormValid && register(formState).unwrap()
-            .then((token) => {
-              dispatch(setCredentials(token))
-              localStorage.setItem('authToken', JSON.stringify(token))
-            })
-            .then(()=>navigate('/'))
-            .catch(err => console.error(err))
+          register(formState).unwrap()
+          .then((userData) => {
+                localStorage.setItem('authToken', JSON.stringify(userData.token))
+                //localStorage.setItem('authRefresh', JSON.stringify(token.refresh))
+                dispatch(setCredentials(userData))
+                console.log('yo', userData)
+              })
+              .then(()=>navigate('/'))
+              .catch(err => console.error(err))
 
         }}
       >
@@ -76,6 +78,7 @@ const Register = () => {
           type={'password'}
           placeholder={'Придумайте пароль ...'}
           onChange={handleChange}
+          minLength={8}
           maxLength={128}
           validityOptions={validityOptions}
           required={true}
